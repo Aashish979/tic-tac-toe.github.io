@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: roboto , sans-serif
+  background-color: aliceblue;
+  max-height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  margin-top: 30px; 
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  margin: 40px;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.Mcontainer {
+  width: 250px;
+  height: 250px;
+  background-color: white;
+  position: relative;
+  display: grid;
+  box-shadow: 0 3px 12px black;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 5px;
+  border-radius: 12px;
+
+
+
+}
+.Mcontainer div {
+  width: calc(250px / 3);
+  height: calc(250px / 3);
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  /*box-sizing: 0 0 5px black;*/
+  /*border:1px solid black;*/
+  overflow: hidden;
+  border-radius: 12px;
+  transition: all 0.5s;
+  
+
+}
+.Mcontainer div:hover{
+ /* background-color: rgba(250,205,120,0.2);*/ 
+ background-color: white;
+ transform: scale(1.1,1.1);
+ color:black;
+cursor: pointer;
+box-shadow: 0 0 5px black;
+overflow:hidden;
+}
+
+.result_info {
+  margin: 1rem ;
+  padding: 1rem ;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px black;
+  background-color:rgb(250,205,120);
+
+}
+
+.result_info p {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 500;
+  margin-top: 10px;
+  color: black;
+
+
+
+
+}
+
+.result_info button:hover
+{
+  color:white;
+}
+
+.result_info button {
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  background-color: black;
+  color: aliceblue;
+  border-radius: 5px;
+  margin-bottom: 5px;
+
+}
+
+#img1,#img2{
+  width:0px;
+  transition: width 1s ease-in-out;
+  display: flex;
+
+
+}
