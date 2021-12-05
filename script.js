@@ -35,7 +35,7 @@ window.onload = () => {
         ) {
         info_box.innerHTML = `WINNER : ${player}`;
         cheers.play();
-        document.getElementById('img1').style.width = '140px';
+        document.getElementById('img1').style.width = '120px';
       game_over = true;
       return;
     }
@@ -48,7 +48,7 @@ window.onload = () => {
       ) {
       info_box.innerHTML = `WINNER : ${player}`;
      cheers.play();
-      document.getElementById('img1').style.width = '140px';
+      document.getElementById('img1').style.width = '120px';
     game_over = true;
     return;
   }
@@ -56,21 +56,21 @@ window.onload = () => {
 if (board[0] !== "x" && board[0] == board[4] && board[0] == board[8]) {
   info_box.innerHTML = `Winner : ${player}`;
    cheers.play();
-  document.getElementById('img1').style.width = '140px'
+  document.getElementById('img1').style.width = '120px'
   game_over = true;
   return;
 }
 if (board[2] !== "x" && board[2] == board[4] && board[2] == board[6]) {
   info_box.innerHTML = `WINNER : ${ player}`
   cheers.play();
-  document.getElementById('img1').style.width = '140px';
+  document.getElementById('img1').style.width = '120px';
   game_over = true;
   return;
 }
 if (board.every((ele) => ele !== "x")) {
   info_box.innerHTML = "DRAW..!!";
   draw.play()
-  document.getElementById('img2').style.width = '140px';
+  document.getElementById('img2').style.width = '120px';
   game_over = true;
   return;
 }
