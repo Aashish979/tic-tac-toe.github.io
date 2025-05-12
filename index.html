@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
 
-     <!-- Bootstrap css Files -->
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="bootstrap/css/mdb.css">
+  <link rel="stylesheet" href="bootstrap/css/style.css">
+</head>
+<body>
 
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="bootstrap/css/mdb.css">
-    <link rel="stylesheet" href="bootstrap/css/style.css">
-       
-    <title>Tic tac toe</title>
-  </head>
-  <body>
-    
+  <div class="container text-center mt-4">
+    <h1 class="mb-3">🎮 Tic-Tac-Toe</h1>
 
-    <h1>Tic-Tac-Toe</h1>
-    <div class="Mcontainer">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="mb-3">
+      <label for="mode" class="form-label">Select Mode:</label>
+      <select id="mode" class="form-select w-auto d-inline-block">
+        <option value="two">Two Player</option>
+        <option value="single">Single Player (vs AI)</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="restart">Restart</button>
     </div>
-    <div class="result_info">
-      <p id="result">Turn:</p>
-      <button class="btn btn-sm" id="restart">Restart</button>
-    </div>
-   <img src="tictac/trump.gif"  id="img1" alt=""/>
-   <img src="tictac/draw.gif"  id="img2" alt=""/>
 
-    <script src="script.js"></script>
-  </body>
+    <div id="result" class="h5 mb-3">Turn:</div>
+
+    <div class="Mcontainer mx-auto">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </div>
+
+   <div class="winner-animations">
+  <img src="media/trump.gif" id="img1" alt="" style="width: 0;" />
+  <img src="media/draw.gif" id="img2" alt="" style="width: 0;" />
+</div>
+
+
+  <script src="script.js"></script>
+</body>
 </html>
-
-
-
