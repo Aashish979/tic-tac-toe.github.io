@@ -9,110 +9,114 @@
 body {
   font-family: 'Roboto', sans-serif;
   background-color: aliceblue;
-  max-height: 100vh;
-  max-width: 100vw;
+  min-height: 100vh;
   width: 100%;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 1rem;
 }
 
 h1 {
-  margin: 40px;
-  font-size: 30px;
+  margin: 20px;
+  font-size: 2rem;
   font-weight: 900;
+  text-align: center;
 }
 
 .Mcontainer {
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
   background-color: white;
-  position: relative;
   display: grid;
-  box-shadow: 0 3px 12px black;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 3px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 5px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
   border-radius: 12px;
+  margin-bottom: 1rem;
 }
 
-.Mcontainer div {
-  width: calc(250px / 3);
-  height: calc(250px / 3);
+.Mcontainer .cell {
+  background: white;
   border: 1px solid gray;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 900;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: all 0.5s;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
-.Mcontainer div:hover {
-  background-color: white;
-  transform: scale(1.1);
-  color: black;
-  cursor: pointer;
+.Mcontainer .cell:hover {
+  transform: scale(1.05);
   box-shadow: 0 0 5px black;
-  overflow: hidden;
 }
 
 .result_info {
-  margin: 1rem;
-  padding: 1rem;
+  margin: 1rem 0;
+  padding: 0.8rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 10px black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: rgb(250, 205, 120);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .result_info p {
-  width: 150px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  font-size: 22px;
+  flex: 1;
+  font-size: 1rem;
   font-weight: 500;
-  margin-top: 10px;
   color: black;
+  margin: 0;
 }
 
 .result_info button {
   outline: none;
   border: none;
-  padding: 5px 10px;
+  padding: 6px 12px;
   background-color: black;
   color: aliceblue;
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-left: 10px;
   transition: background-color 0.3s;
+  font-size: 0.9rem;
 }
 
 .result_info button:hover {
   background-color: #333;
-  color: Grey;
+  color: grey;
 }
 
 .winner-animations {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-
-
+#img1, #img2 {
+  max-width: 100px;
+  height: auto;
+  transition: width 1s ease-in-out;
+}
 
 /* Winning Line Animation */
 .line {
   position: absolute;
-  background-color: #ff5722; /* Orange color for the winning line */
+  background-color: #ff5722;
   z-index: 10;
   transition: all 1s ease-out;
-  height: 5px; /* Adjust the line height */
+  height: 5px;
 }
 
 @keyframes lineAnimation {
@@ -124,53 +128,57 @@ h1 {
   }
 }
 
-/* Responsive Design */
+/* Responsive Tweaks */
 @media (max-width: 768px) {
   .Mcontainer {
-    width: 200px;
-    height: 200px;
+    max-width: 240px;
+    gap: 4px;
   }
-  .Mcontainer div {
-    width: calc(200px / 3);
-    height: calc(200px / 3);
-    font-size: 1.4rem;
+
+  .Mcontainer .cell {
+    font-size: 1.5rem;
   }
-  .result_info p {
-    font-size: 1rem;
+
+  .result_info {
+    max-width: 240px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .result_info button {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .Mcontainer {
-    width: 180px;
-    height: 180px;
+  h1 {
+    font-size: 1.5rem;
   }
+
+  .Mcontainer {
+    max-width: 200px;
+    gap: 3px;
+  }
+
   .Mcontainer .cell {
-  width: calc(250px / 3);
-  height: calc(250px / 3);
-  border: 1px solid gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.6rem;
-  font-weight: 900;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: all 0.5s;
-}
+    font-size: 1.2rem;
+  }
+
+  .result_info {
+    max-width: 200px;
+  }
 
   .result_info p {
     font-size: 0.9rem;
   }
+
   .result_info button {
     font-size: 0.8rem;
     padding: 5px 8px;
   }
-}
 
-/* Adding Transition Effects */
-#img1, #img2 {
-  max-width: 100px;
-  height: auto;
-  transition: width 1s ease-in-out;
+  #img1, #img2 {
+    max-width: 80px;
+  }
 }
