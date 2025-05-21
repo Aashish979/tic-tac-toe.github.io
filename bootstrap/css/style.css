@@ -19,12 +19,6 @@ body {
   flex-direction: column;
 }
 
-h1 {
-  margin: 40px;
-  font-size: 30px;
-  font-weight: 900;
-}
-
 .Mcontainer {
   width: 250px;
   height: 250px;
@@ -48,15 +42,15 @@ h1 {
   font-weight: 900;
   overflow: hidden;
   border-radius: 12px;
-  transition: all 0.5s;
-}
+  transition: all 0.2s;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), inset 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
 
 .Mcontainer div:hover {
   background-color: white;
-  transform: scale(1.1);
   color: black;
   cursor: pointer;
-  box-shadow: 0 0 5px black;
+  transform: translateY(-2px);
   overflow: hidden;
 }
 
@@ -180,17 +174,30 @@ h1 {
     height: 180px;
   }
   .Mcontainer .cell {
-    width: calc(250px / 3);
-    height: calc(250px / 3);
+    width: calc(180px / 3);
+    height: calc(180px / 3);
     border: 1px solid gray;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 900;
     overflow: hidden;
     border-radius: 12px;
     transition: all 0.5s;
+  }
+
+  .winning-line.horizontal {
+    height: 3px;
+  }
+
+  .winning-line.vertical {
+    width: 3px;
+  }
+
+  .winning-line.diagonal {
+    width: 3px;
+    /* height: 115%; */
   }
 
   .result_info p {
