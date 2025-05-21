@@ -12,6 +12,18 @@ window.onload = () => {
   let board, player, gameOver, mode;
 
   const initGame = () => {
+    // Stop all sounds
+    cheers.pause();
+    cheers.currentTime = 0;
+    drawSound.pause();
+    drawSound.currentTime = 0;
+    audioTurn.pause();
+    audioTurn.currentTime = 0;
+    
+    // Play start music
+    music.currentTime = 0;
+    music.play();
+
     board = Array(9).fill("");
     player = Math.random() < 0.5 ? "X" : "O"; // Random first turn between Player and AI
     gameOver = false;
@@ -19,6 +31,9 @@ window.onload = () => {
     boxes.forEach((box) => (box.textContent = ""));
     document.getElementById("img1").style.width = "0";
     document.getElementById("img2").style.width = "0";
+    // Remove any existing winning lines
+    const winningLines = document.querySelectorAll('.winning-line');
+    winningLines.forEach(line => line.remove());
 
     if (mode === "single" && player === "O") {
       info_box.innerHTML = "AI Thinking..."; // Show AI is thinking if AI goes first
@@ -26,7 +41,6 @@ window.onload = () => {
     } else {
       info_box.innerHTML = `Turn: ${player}`; // Show Player turn if Player goes first
     }
-    music.play();
   };
 
   const checkWinner = () => {
@@ -61,7 +75,7 @@ window.onload = () => {
           line.style.transformOrigin = "top";
           line.style.transform = "scaleY(0)";
         } else if (lineType === "diagonal") {
-          line.style.top = "-13%";
+          // line.style.top = "-13%";
           line.style.transformOrigin = "left";
           line.style.transform = `rotate(${position}deg) scaleY(0)`;
         }
@@ -191,9 +205,33 @@ window.onload = () => {
     });
   });
 
-  restart.addEventListener("click", initGame);
+  restart.addEventListener("click", () => {
+    // Fade out cells
+    boxes.forEach(box => {
+      box.style.transition = 'opacity 0.3s';
+      box.style.opacity = '0';
+    });
+
+    // Fade out winning line if exists
+    const winningLines = document.querySelectorAll('.winning-line');
+    winningLines.forEach(line => {
+      line.style.transition = 'opacity 0.3s';
+      line.style.opacity = '0';
+    });
+
+    // Wait for fade out, then init game and fade in
+    setTimeout(() => {
+      initGame();
+      boxes.forEach(box => {
+        box.style.opacity = '1';
+      });
+    }, 300);
+  });
   modeSelect.addEventListener("change", initGame);
 
- //initGame(); // Start game on load
+ initGame(); // Start game on load
 };
+
+
+
 
