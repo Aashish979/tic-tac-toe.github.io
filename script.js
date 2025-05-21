@@ -4,51 +4,78 @@ window.onload = () => {
   const restart = document.getElementById("restart");
   const modeSelect = document.getElementById("mode");
 
-  const music = new Audio('media/music.mp3');
-  const audioTurn = new Audio('media/turn.mp3');
-  const cheers = new Audio('media/cheers.mp3');
-  const drawSound = new Audio('media/draw.mp3');
+  const music = new Audio("media/music.mp3");
+  const audioTurn = new Audio("media/turn.mp3");
+  const cheers = new Audio("media/cheers.mp3");
+  const drawSound = new Audio("media/draw.mp3");
 
   let board, player, gameOver, mode;
 
   const initGame = () => {
-  board = Array(9).fill("");
-  player = Math.random() < 0.5 ? "X" : "O"; // Random first turn between Player and AI
-  gameOver = false;
-  mode = modeSelect.value;
-  boxes.forEach(box => box.textContent = "");
-  document.getElementById('img1').style.width = '0';
-  document.getElementById('img2').style.width = '0';
-  
-  if (mode === "single" && player === "O") {
-    info_box.innerHTML = "AI Thinking..."; // Show AI is thinking if AI goes first
-    aiMove(); // If AI goes first, make AI move
-  } else {
-    info_box.innerHTML = `Turn: ${player}`; // Show Player turn if Player goes first
-  }
-  music.play();
-};
+    board = Array(9).fill("");
+    player = Math.random() < 0.5 ? "X" : "O"; // Random first turn between Player and AI
+    gameOver = false;
+    mode = modeSelect.value;
+    boxes.forEach((box) => (box.textContent = ""));
+    document.getElementById("img1").style.width = "0";
+    document.getElementById("img2").style.width = "0";
 
+    if (mode === "single" && player === "O") {
+      info_box.innerHTML = "AI Thinking..."; // Show AI is thinking if AI goes first
+      aiMove(); // If AI goes first, make AI move
+    } else {
+      info_box.innerHTML = `Turn: ${player}`; // Show Player turn if Player goes first
+    }
+    music.play();
+  };
 
   const checkWinner = () => {
     const wins = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-      [0, 4, 8], [2, 4, 6]
+      [0, 1, 2, "horizontal", 16.67],
+      [3, 4, 5, "horizontal", 50],
+      [6, 7, 8, "horizontal", 83.33],
+      [0, 3, 6, "vertical", 16.67],
+      [1, 4, 7, "vertical", 50],
+      [2, 5, 8, "vertical", 83.33],
+      [0, 4, 8, "diagonal", -45],
+      [2, 4, 6, "diagonal", 45],
     ];
-    for (let combo of wins) {
-      const [a, b, c] = combo;
+
+    for (let [a, b, c, lineType, position] of wins) {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         info_box.innerHTML = `WINNER: ${board[a]}`;
-        document.getElementById('img1').style.width = '120px';
+        document.getElementById("img1").style.width = "120px";
         cheers.play();
         gameOver = true;
+
+        // Create and add winning line
+        const line = document.createElement("div");
+        line.className = `winning-line ${lineType}`;
+
+        if (lineType === "horizontal") {
+          line.style.top = `${position}%`;
+          line.style.transformOrigin = "left";
+          line.style.transform = "scaleX(0)";
+        } else if (lineType === "vertical") {
+          line.style.left = `${position}%`;
+          line.style.transformOrigin = "top";
+          line.style.transform = "scaleY(0)";
+        } else if (lineType === "diagonal") {
+          line.style.top = "-13%";
+          line.style.transformOrigin = "left";
+          line.style.transform = `rotate(${position}deg) scaleY(0)`;
+        }
+
+        document.querySelector(".Mcontainer").appendChild(line);
+        // Trigger animation
+        setTimeout(() => line.classList.add("show"), 50);
         return true;
       }
     }
-    if (board.every(cell => cell !== "")) {
+
+    if (board.every((cell) => cell !== "")) {
       info_box.innerHTML = "DRAW..!!";
-      document.getElementById('img2').style.width = '120px';
+      document.getElementById("img2").style.width = "120px";
       drawSound.play();
       gameOver = true;
       return true;
@@ -126,9 +153,14 @@ window.onload = () => {
 
   const getWinner = (b) => {
     const wins = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-      [0, 4, 8], [2, 4, 6]
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
     ];
     for (let [a, b1, c] of wins) {
       if (b[a] && b[a] === b[b1] && b[a] === b[c]) return b[a];
@@ -162,5 +194,6 @@ window.onload = () => {
   restart.addEventListener("click", initGame);
   modeSelect.addEventListener("change", initGame);
 
-  initGame(); // Start game on load
+ //initGame(); // Start game on load
 };
+
