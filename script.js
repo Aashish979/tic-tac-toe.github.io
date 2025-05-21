@@ -39,7 +39,7 @@ window.onload = () => {
       info_box.innerHTML = "AI Thinking..."; // Show AI is thinking if AI goes first
       aiMove(); // If AI goes first, make AI move
     } else {
-      info_box.innerHTML = `Turn: ${player}`; // Show Player turn if Player goes first
+      info_box.innerHTML = mode === "single" ? "Your turn" : `Turn: ${player}`; // Show appropriate message based on mode
     }
   };
 
@@ -57,9 +57,21 @@ window.onload = () => {
 
     for (let [a, b, c, lineType, position] of wins) {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        info_box.innerHTML = `WINNER: ${board[a]}`;
-        document.getElementById("img1").style.width = "120px";
-        cheers.play();
+        if (mode === "single") {
+          if (board[a] === "O") {
+            info_box.innerHTML = "AI Win!";
+            document.getElementById("img2").style.width = "120px";
+            drawSound.play();
+          } else {
+            info_box.innerHTML = "You Win!";
+            document.getElementById("img1").style.width = "120px";
+            cheers.play();
+          }
+        } else {
+          info_box.innerHTML = `WINNER: ${board[a]}`;
+          document.getElementById("img1").style.width = "120px";
+          cheers.play();
+        }
         gameOver = true;
 
         // Create and add winning line
@@ -129,7 +141,7 @@ window.onload = () => {
       checkWinner();
       if (!gameOver) {
         player = "X";
-        info_box.innerHTML = `Turn: ${player}`;
+        info_box.innerHTML = mode === "single" ? "Your turn" : `Turn: ${player}`;
       }
     }, 500); // AI delay
   };
@@ -199,7 +211,7 @@ window.onload = () => {
         makeMove(i, player);
         if (!checkWinner()) {
           player = player === "X" ? "O" : "X";
-          info_box.innerHTML = `Turn: ${player}`;
+          info_box.innerHTML = mode === "single" ? "Your turn" : `Turn: ${player}`;
         }
       }
     });
